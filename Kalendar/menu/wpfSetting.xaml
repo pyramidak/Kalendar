@@ -1,0 +1,43 @@
+﻿<Window x:Class="wpfSetting"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Nastavení Kalendáře" Height="410" Width="600" Name="wndSetting" WindowStartupLocation="CenterOwner" MinWidth="550" MinHeight="350" SizeToContent="WidthAndHeight" ShowInTaskbar="False">
+
+    <DockPanel Name="DockPanel1">       
+        <ListBox Height="Auto" Name="lbxMenu" Width="150" HorizontalContentAlignment="Left" VerticalAlignment="Stretch">
+            <StackPanel Orientation ="Horizontal" Tag ="Birthday" Height="40">
+                <Image Source="{StaticResource Dort}" Margin="4" Width="32" />
+                <Label Content ="Narozeniny" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Note" Height="40">
+                <Image Source="{StaticResource Zapisnik }" Margin="4" Width="32" />
+                <Label Content ="Plány" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Service" Height="40">
+                <Image Source="{StaticResource Vykricnik }" Margin="4" Width="32" />
+                <Label Content ="Služba" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Launch" Height="40">
+                <Image Source="{StaticResource Autostart }" Margin="4" Width="32" />
+                <Label Content ="Spouštění" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Color" Height="40">
+                <Image Source="{StaticResource Paleta }" Margin="4" />
+                <Label Content ="Barvy" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Save" Height="40">
+                <Image Source="{StaticResource Disketa }" Margin="4" Width="32" />
+                <Label Content ="Ukládání" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="Key" Height="40">
+                <Image Source="{StaticResource Mys }" Margin="4" Width="32" />
+                <Label Content ="Ovládání" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation ="Horizontal" Tag ="About" Height="40">
+                <Image Source="{StaticResource Dum }" Margin="4" Width="32" />
+                <Label Content ="O programu" FontSize ="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            </StackPanel>
+        </ListBox>
+        <Frame Height="Auto" Name="FramePage" Width="Auto" DockPanel.Dock="Right" HorizontalAlignment="Stretch" NavigationUIVisibility="Hidden" />
+    </DockPanel>
+</Window>

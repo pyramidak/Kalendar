@@ -1,0 +1,8 @@
+﻿<Window x:Class="wpfBrowser"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+     Title="Přihlášení k účtu OneDrive" Height="500" Width="400" Icon="{StaticResource OneDrive }" WindowStartupLocation="CenterOwner">
+    <Grid>
+        <WebBrowser Name="webBrowser" LoadCompleted="webBrowser_LoadCompleted" />
+    </Grid>
+</Window>

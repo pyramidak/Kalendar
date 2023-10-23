@@ -1,0 +1,56 @@
+﻿<Page x:Class="ppfBirthday"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="380" d:DesignWidth="550"
+      Title="Narozeniny" Name="ppfBirthday" Width="Auto">
+    <Grid Background="#FFC0C0FF" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FFA0A0FF" BorderThickness="1" Height="35" HorizontalAlignment="Stretch" Margin="20" Name="Border1" VerticalAlignment="Top" Width="Auto" CornerRadius="15" Background="#FFA0A0FF" />
+        <Label Content="Editace narozenin" Height="35" HorizontalAlignment="Stretch" Margin="30,20,20,20" Name="lblHeader" VerticalAlignment="Top" Width="Auto" FontSize="18" FontWeight="Bold" />
+        <TextBlock FontSize="13" Height="38" HorizontalAlignment="Left" Margin="30,0,0,0" Name="lblNarozenin" Text="vložte celé nové jméno nebo vyberte již založené" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Row="1" />
+        <ComboBox Background="#FFF5F5FF" FontSize="16" Height="30" HorizontalAlignment="Left" IsEditable="True" Margin="25,40,0,0" Name="cboNarozenin" VerticalAlignment="Top" Width="165" Grid.Row="1" TextBoxBase.TextChanged="cboNarozenin_TextChanged" />
+        <Button Content="Přidat" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="25,15,0,0" Name="cmdSave" VerticalAlignment="Top" Width="75" IsEnabled="True">
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Přidat jméno.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button> 
+        <Button Content="Odebrat" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="115,15,0,0" Name="cmdRemove" VerticalAlignment="Top" Width="75" >
+            <Button.ToolTip>
+                <ToolTip>
+                    <StackPanel>
+                        <TextBlock>Odebrat jméno.</TextBlock>
+                    </StackPanel>
+                </ToolTip>
+            </Button.ToolTip>
+        </Button>
+        <RadioButton Content="rok narození" FontSize="13" Grid.Row="1" GroupName="narozeni" HorizontalAlignment="Left" IsChecked="True" Margin="38,94,0,0" Name="rbnRokNar" Width="98" VerticalAlignment="Top" Height="25" IsEnabled="True" />
+        <RadioButton Content="počet let" FontSize="13" Grid.Row="1" GroupName="narozeni" Height="25" HorizontalAlignment="Left" Margin="38,118,0,0" Name="rbnPocLet" VerticalAlignment="Top" Width="98" IsEnabled="True" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="139,102,0,0" MaxLength="4" Name="txtRokLet" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="210,108,0,0" Name="TextBlock1" Text="den" VerticalAlignment="Top" Width="28" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="244,102,0,0" MaxLength="2" Name="txtDenU" VerticalAlignment="Top" Width="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="290,108,0,0" Name="TextBlock2" Text="měsíc" VerticalAlignment="Top" Width="34" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="330,102,0,0" MaxLength="2" Name="txtMesicU" VerticalAlignment="Top" Width="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <RadioButton Content="rok úmrtí" FontSize="13" Grid.Row="1" GroupName="umrti" Height="25" HorizontalAlignment="Left" IsChecked="False" Margin="38,162,0,0" Name="rbnSmrtRok" VerticalAlignment="Top" Width="98" IsEnabled="True" />
+        <RadioButton Content="dožitých let" FontSize="13" Grid.Row="1" GroupName="umrti" Height="25" HorizontalAlignment="Left" IsChecked="True" Margin="38,186,0,0" Name="rbnSmrtLet" VerticalAlignment="Top" Width="98" IsEnabled="True" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="139,169,0,0" MaxLength="4" Name="txtRokSmrt" VerticalAlignment="Top" Width="50" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="210,175,0,0" Name="TextBlock3" Text="den" VerticalAlignment="Top" Width="28" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="244,169,0,0" MaxLength="2" Name="txtDenSmrt" VerticalAlignment="Top" Width="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="290,175,0,0" Name="TextBlock4" Text="měsíc" VerticalAlignment="Top" Width="34" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="330,169,0,0" MaxLength="2" Name="txtMesicSmrt" VerticalAlignment="Top" Width="30" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="25" HorizontalAlignment="Left" Margin="250,17,0,0" Name="lbRC" Text="rodné číslo" TextWrapping="Wrap" VerticalAlignment="Top" Width="84" />
+        <TextBox Background="#FFF5F5FF" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="245,40,0,0" MaxLength="11" Name="txtRC" VerticalAlignment="Top" Width="115" Padding="5,1,1,1" />
+        <Button Content="Přidat ze zálohy" Height="25" HorizontalAlignment="Left" Margin="240,15,0,0" Name="btnBackup" VerticalAlignment="Top" Width="120" Grid.Row="2" />
+        <CheckBox x:Name="ckbUmrti" Content="" HorizontalAlignment="Left" Margin="12,172,0,0" Grid.Row="1" VerticalAlignment="Top"/>
+    </Grid>
+</Page>

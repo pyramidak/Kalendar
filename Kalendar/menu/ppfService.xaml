@@ -1,0 +1,26 @@
+﻿<Page x:Class="ppfService"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="349" d:DesignWidth="552"
+      Title="Narozeniny" Name="ppfService" Width="Auto">
+    <Grid Background="#FFFFC0C0" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+            <RowDefinition Height="60" />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FFF5A0A0" BorderThickness="1" Height="35" Margin="20,20,20,0" Name="Border1" VerticalAlignment="Top" CornerRadius="15" Background="#FFF5A0A0" />
+        <Label Content="Nastavení služby" Height="35" HorizontalAlignment="Stretch" Margin="30,20,20,20" Name="lblHeader" VerticalAlignment="Top" Width="Auto" FontSize="18" FontWeight="Bold" />
+        <TextBlock FontSize="13" Height="23" HorizontalAlignment="Left" Margin="30,10,0,0" Name="lblFirst" Text="datum prvního dne služby" TextWrapping="Wrap" VerticalAlignment="Top" Width="160" Grid.Row="1" />
+        <Button Content="Uložit" Grid.Row="2" Height="25" HorizontalAlignment="Left" Margin="25,15,0,0" Name="btnSave" VerticalAlignment="Top" Width="100" />
+        <TextBlock FontSize="13" Grid.Row="1" Height="60" HorizontalAlignment="Left" Margin="30,45,0,0" Name="lblNext" Text="zadejte po kolika dnech se služba znovu opakuje, 0 deaktivuje službu" TextWrapping="Wrap" VerticalAlignment="Top" Width="150" />
+        <TextBox Background="#FFFCF2F2" FontSize="16" Grid.Row="1" Height="30" HorizontalAlignment="Left" Margin="200,5,0,0" MaxLength="10" Name="txtFirst" Text="" VerticalAlignment="Top" Width="90" />
+        <TextBox Background="#FFFCF2F2" FontSize="16" Height="30" HorizontalAlignment="Left" Margin="200,50,0,0" MaxLength="2" Name="txtNext" Text="" VerticalAlignment="Top" Width="30" Grid.Row="1" />
+        <TextBlock FontSize="13" Height="60" Margin="30,120,0,0" Name="lblPic" Text="vyberte vlastní upozorňující obrázek levým kliknutím, pravý klik nastaví výchozí" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" HorizontalAlignment="Left" Width="160" />
+        <Rectangle Grid.Row="1" Height="60" HorizontalAlignment="Left" Margin="200,120,0,0" Name="Rectangle1" Stroke="Black" VerticalAlignment="Top" Width="60" Fill="#FFFCF2F2" StrokeThickness="0" />
+        <Image Grid.Row="1" Height="60" HorizontalAlignment="Left" Margin="200,120,0,0" Name="picA" Stretch="Fill" VerticalAlignment="Top" Width="60" />
+    </Grid>
+</Page>

@@ -1,0 +1,40 @@
+﻿<Page x:Class="ppfKey"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="445" d:DesignWidth="480"
+      Title="Narozeniny" Name="ppfKey" Width="Auto">
+    <Grid Background="#FFBED3E8" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Border BorderBrush="#FF98BEDB" BorderThickness="1" Height="35" Margin="20,20,20,0" Name="Border1" VerticalAlignment="Top" CornerRadius="15" Background="#FF98BEDB" />
+        <Label Content="Ovládání" Height="35" HorizontalAlignment="Stretch" Margin="30,20,20,20" Name="lblHeader" VerticalAlignment="Top" Width="Auto" FontSize="18" FontWeight="Bold" />
+        <Grid Grid.Row="1" HorizontalAlignment="Left" Margin="20,0,0,0" Name="Grid1" Width="430" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Height="23" HorizontalAlignment="Right" Margin="0,0,0,0" Text="nápověda" VerticalAlignment="Top" FontSize="14" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,0,0,0" Text="F1" VerticalAlignment="Top" Grid.Column="1" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,25,0,0" Text="tisknout týden" VerticalAlignment="Top" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,25,0,0" Text="Ctrl+T" VerticalAlignment="Top" Grid.Column="1" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,50,0,0" Text="dnešní den" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,50,0,0" Text="Ctrl+S &#10;prostřední klik &#10;tažením prstu horizontálně přes okno"  VerticalAlignment="Top" Grid.Column="1" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,111,0,0" Text="-/+ týden" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,111,0,0" Text="Ctrl+A / Ctrl+D &#10;kolečkem myši &#10;levý / pravý klik na pole -týden- &#10;tažením prstu nahoru či dolu přes okno &#10;dotyk prstem nebo dvěma na pole -týden-" VerticalAlignment="Top" Grid.Column="1" TextWrapping="Wrap" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,210,0,0" Text="-/+ měsíc" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,210,0,0" Text="levý / pravý klik na pole -měsíc-&#10;dotyk prstem nebo dvěma na pole -měsíc-" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Column="1" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,252,0,0" Text="-/+ rok" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,252,0,0" Text="levý / pravý klik na pole -rok- &#10;dotyk prstem nebo dvěma na pole -rok-" TextWrapping="Wrap" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Top" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,294,0,0" Text="velikost písma" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,294,0,25" Text="Ctrl + kolečko myši" Grid.Column="1" VerticalAlignment="Top" Grid.RowSpan="2" />
+            <TextBlock FontSize="14" HorizontalAlignment="Right" Margin="0,319,0,0" Text="změna jazyka" VerticalAlignment="Top" Grid.Column="0" FontWeight="Bold" />
+            <TextBlock FontSize="14" HorizontalAlignment="Left" Margin="20,319,0,25" Text="Ctrl + L" Grid.Column="1" VerticalAlignment="Top" Grid.RowSpan="2" />
+
+        </Grid>
+    </Grid>
+</Page>

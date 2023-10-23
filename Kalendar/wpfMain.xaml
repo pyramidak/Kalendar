@@ -1,0 +1,394 @@
+﻿<Window x:Class="WpfMain"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:RootSpace"
+    Title="Kalendář" Height="675" Width="680" MinWidth="600" MinHeight="480" Icon="/Kalendar;component/Kalendar.ico" Name="wndMain" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <local:clsStringToVisibilityConverter x:Key="StringVisibilityConverter" />
+        
+        <Style x:Key="DenRectangle" TargetType="Rectangle" >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Stretch"  />
+            <Setter Property="Margin" Value="10,5,5,25" />
+            <Setter Property="Stroke" Value="Black" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="Fill" Value="{Binding DenBrush}" />
+        </Style>
+        <Style x:Key="DenViewbox" TargetType="Viewbox"   >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="HorizontalAlignment" Value="Left"  />
+            <Setter Property="VerticalAlignment" Value="Stretch"  />
+            <Setter Property="Margin" Value="10,5,5,25" />
+            <Setter Property="Stretch"  Value="Uniform" />
+        </Style>
+        <Style x:Key="Den" TargetType="TextBlock" >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="FontFamily" Value="Arial" />
+            <Setter Property="FontSize" Value="26" />
+            <Setter Property="Padding" Value="4" />
+        </Style>
+        <Style x:Key="DenJmeno" TargetType="TextBlock" >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Bottom"  />
+            <Setter Property="Margin" Value="10,0,5,5" /> 
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10,2" />
+            <Setter Property="Background" Value="{Binding DenJmenoBrush}" />
+        </Style>
+        <Style x:Key="Zavreno" TargetType="Image" >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Source" Value="{StaticResource Closed-R}"  />
+            <Setter Property="HorizontalAlignment" Value="Right"  />
+            <Setter Property="VerticalAlignment" Value="Top"  />
+            <Setter Property="Margin" Value="0,5,5,0" />
+            <Setter Property="Stretch" Value="Fill" />
+            <Setter Property="ToolTip" Value="Obchody jsou zavřené." />
+        </Style>
+        <Style x:Key="Sluzba" TargetType="Image" >
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="40" />
+            <Setter Property="Source" Value="{Binding SluzbaImg}"  />
+            <Setter Property="HorizontalAlignment" Value="Right"  />
+            <Setter Property="VerticalAlignment" Value="Top"  />
+            <Setter Property="Margin" Value="0,5,5,0" />
+            <Setter Property="Stretch" Value="Fill" />
+            <Setter Property="OpacityMask" Value="Gray" />
+        </Style>
+        <Style x:Key="NarozViewbox" TargetType="Viewbox"   >
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Stretch"  />
+            <Setter Property="Margin" Value="5,5,5,25" />
+            <Setter Property="MinHeight"  Value="20" />
+        </Style>
+        <Style x:Key="NarozRectangle" TargetType="Rectangle" >
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Stretch"  />
+            <Setter Property="Margin" Value="5,5,5,25" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="StrokeThickness" Value="0" />
+            <Setter Property="Fill" Value="{Binding NarozeninyBrush}" />
+        </Style>
+        <Style x:Key="Narozeniny" TargetType="TextBlock"  >
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width"  Value="Auto" />
+            <Setter Property="HorizontalAlignment"   Value="Stretch"  />
+            <Setter Property="VerticalAlignment"    Value="Stretch"  />
+            <Setter Property="Padding"  Value="2" />
+            <Setter Property="MinHeight"  Value="20" />
+            <Setter Property="Background"  Value="Transparent"  />
+            <Setter Property="FontSize"  Value="13" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+        <Style x:Key="Jmeniny" TargetType="TextBlock"    >
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Bottom"  />
+            <Setter Property="Margin" Value="5,0,5,5" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10,2" />
+            <Setter Property="Background" Value="{Binding JmeninyBrush}" />
+        </Style>
+        <Style x:Key="Svatek" TargetType="TextBlock"    >
+            <Setter Property="Grid.Column" Value="2" />
+            <Setter Property="HorizontalAlignment" Value="Stretch"  />
+            <Setter Property="VerticalAlignment" Value="Bottom"  />
+            <Setter Property="Margin" Value="5,0,10,5" />
+            <Setter Property="Height" Value="20" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Padding" Value="10,2" />
+            <Setter Property="Background" Value="{Binding SvatkyBrush}" />
+        </Style>
+        
+        <Style x:Key="Opakovat" TargetType="CheckBox"    >
+            <Setter Property="HorizontalAlignment" Value="Right"   />
+            <Setter Property="VerticalAlignment" Value="Top"  />
+            <Setter Property="Margin" Value="0,0,0,0" />
+            <Setter Property="Background" Value="{Binding PoznamkaBrush}" />
+        </Style>
+        <Style x:Key="Poznamka" TargetType="TextBox"    >
+            <Setter Property="Height" Value="Auto" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Padding" Value="5,5" />
+            <Setter Property="MinHeight" Value="20" />
+            <Setter Property="HorizontalContentAlignment" Value="Left"  />
+            <Setter Property="VerticalContentAlignment" Value="Center"  />
+            <Setter Property="FontWeight" Value="Normal"  />
+            <Setter Property="TextWrapping" Value="Wrap" />
+            <Setter Property="Background" Value="{Binding PoznamkaBrush}" />
+            <Setter Property="FontSize" Value="{Binding FontSize}" />
+        </Style>
+        <Style x:Key="ItemPanel" TargetType="{x:Type ListView}">
+            <Setter Property="ItemsPanel">
+                <Setter.Value>
+                    <ItemsPanelTemplate>
+                        <WrapPanel /> 
+                    </ItemsPanelTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"  />
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
+        </Style>
+        <Style x:Key="ItemPoznamka" TargetType="{x:Type ListViewItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <StackPanel Orientation="Horizontal" MouseWheel="Poznamky_MouseWheel">
+                            <StackPanel Orientation="Vertical">
+                                <CheckBox IsChecked="{Binding Mesicne, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Opakovat}" ToolTip="Opakovat upomínku měsíčně." />
+                                <CheckBox IsChecked="{Binding Rocne, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Opakovat}" ToolTip="Opakovat upomínku každoročně." />
+                            </StackPanel>
+                            <TextBox Text="{Binding Time, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Poznamka}" MaxLength="5" Foreground="{Binding TimeBrush}" />
+                            <TextBox Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource Poznamka}" MinWidth="50" TextChanged="TextBox_TextChanged"  />
+                        </StackPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Resources>
+    <Grid Name="gridPrint">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" MinHeight="20" />
+            <RowDefinition Height="70" MinHeight="70" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition MinHeight="50" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="14.5*" />
+            <ColumnDefinition Width="28.5*" />
+            <ColumnDefinition Width="57*" />
+        </Grid.ColumnDefinitions>
+        
+        <Menu Height="23" HorizontalAlignment="Stretch" Name="Menu1" VerticalAlignment="Top" Width="Auto" Grid.ColumnSpan="3">
+            <MenuItem Header="Týden" Name="smuTyden">
+                <MenuItem Header="Současný" Name="smiDnesek">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource Dnes}" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Další" Name="smiDalsi">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource Dalsi}" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Zpátky" Name="smiZpatky">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource Zpet}" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Zálohovat" Name="smiSave">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource DisketaBW}" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Tisk" Name="smiTisk">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource Tisk}" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Jazyk">
+                    <MenuItem.Icon>
+                        <Image x:Name="imgJazyk" Source="{StaticResource flagCZbw}" Height="14" />
+                    </MenuItem.Icon>
+                    <MenuItem Header="Česky" Name="smiCZ">
+                        <MenuItem.Icon>
+                            <Image Source="{StaticResource flagCZ}" Height="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Slovensky" Name="smiSK">
+                        <MenuItem.Icon>
+                            <Image Source="{StaticResource flagSK}" Height="16" />
+                        </MenuItem.Icon>
+                    </MenuItem>
+                </MenuItem>
+                <Separator />
+                <MenuItem Header="Konec" Name="smiKonec">
+                    <MenuItem.Icon>
+                        <Image Source="{StaticResource Vypnout}" Width="16" Height="16" />
+                    </MenuItem.Icon>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Nastavení" Name="smuNastaveni"></MenuItem>
+            <MenuItem Header="Nápověda" Name="smuNapoveda"/>
+            <MenuItem Header="Aktualizovat" Visibility="Collapsed"  Name="smuUpdate" />
+        </Menu>
+        
+        <Label Content="2012" Grid.Row="1" Height="25" HorizontalAlignment="Stretch" Margin="10,10,5,0" Name="lblRok" VerticalAlignment="Top" Background="#FFFF8000" FontSize="16" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Bold" Padding="0" />
+        <Label Content="x. týden" Grid.Row="1" Height="25" HorizontalAlignment="Stretch" Margin="5,10,5,0" Name="lblTyden" VerticalAlignment="Top" Background="#FFFF8000" FontSize="16" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Column="1" Padding="0" />
+        <Label Content="Srpen / Září" Grid.Row="1" Height="25" HorizontalAlignment="Stretch" Margin="5,10,10,0" Name="lblMesic" VerticalAlignment="Top" Background="#FFFF8000" FontSize="16" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Bold" Grid.Column="2" Padding="0" MinWidth="0" />
+        <Label Content="Den" Grid.Row="1" Height="20" HorizontalAlignment="Stretch" Margin="10,45,5,0" Name="lblDenNadpis" VerticalAlignment="Top" Background="#FFFFC080" FontSize="12" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Normal" Padding="0" VerticalContentAlignment="Center" />
+        <Label Content="Narozeniny / Jmeniny" Grid.Row="1" Height="20" HorizontalAlignment="Stretch" Margin="5,45,5,0" Name="lblNarozeninyNadpis" VerticalAlignment="Top" Background="#FFFFC080" FontSize="12" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Normal" Grid.Column="1" Padding="0" VerticalContentAlignment="Center" />
+        <Label Content="Plány / Svátky" Grid.Row="1" Height="20" HorizontalAlignment="Stretch" Margin="5,45,10,0" Name="lblUpominkyNadpis" VerticalAlignment="Top" Background="#FFFFC080" FontSize="12" FontFamily="Segoe UI" HorizontalContentAlignment="Center" FontWeight="Normal" Grid.Column="2" Padding="0" VerticalContentAlignment="Center" MinWidth="0" />
+        <!-- Pondělí -->
+        <Rectangle Grid.Row="2" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="2" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="2" Text="{Binding Pondeli.Den}" Foreground="{Binding Pondeli.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Pondeli.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="2" Text="{Binding Pondeli.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="2" Visibility="{Binding Pondeli.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="2" Visibility="{Binding Pondeli.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="2" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="2" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Pondeli.Narozeniny}" Cursor="{Binding Pondeli.CursorNarozeniny}" Tag="{Binding Pondeli.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="2" Text="{Binding Pondeli.Jmeniny}" Cursor="{Binding Pondeli.CursorJmeniny}" Tag="{Binding Pondeli.TagJmeno}" Foreground="{Binding Pondeli.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="2" Text="{Binding Pondeli.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="2" Margin="5,5,10,25" Grid.Row="2" ItemsSource="{Binding Pondeli.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Úterý -->
+        <Rectangle Grid.Row="3" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="3" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="3" Text="{Binding Utery.Den}" Foreground="{Binding Utery.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Utery.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="3" Text="{Binding Utery.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="3" Visibility="{Binding Utery.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="3" Visibility="{Binding Utery.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="3" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="3" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Utery.Narozeniny}" Cursor="{Binding Utery.CursorNarozeniny}" Tag="{Binding Utery.TagNaroz}" Style="{StaticResource Narozeniny}"  MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown"/>
+        </Viewbox>
+        <TextBlock Grid.Row="3" Text="{Binding Utery.Jmeniny}" Cursor="{Binding Utery.CursorJmeniny}" Tag="{Binding Utery.TagJmeno}" Foreground="{Binding Utery.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="3" Text="{Binding Utery.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="3" ItemsSource="{Binding Utery.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Středa -->
+        <Rectangle Grid.Row="4" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="4" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="4" Text="{Binding Streda.Den}" Foreground="{Binding Streda.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Streda.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="4" Text="{Binding Streda.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="4" Visibility="{Binding Streda.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="4" Visibility="{Binding Streda.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="4" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="4" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Streda.Narozeniny}" Cursor="{Binding Streda.CursorNarozeniny}" Tag="{Binding Streda.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="4" Text="{Binding Streda.Jmeniny}" Cursor="{Binding Streda.CursorJmeniny}" Tag="{Binding Streda.TagJmeno}" Foreground="{Binding Streda.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="4" Text="{Binding Streda.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="4" ItemsSource="{Binding Streda.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Čtvrtek -->
+        <Rectangle Grid.Row="5" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="5" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="5" Text="{Binding Ctvrtek.Den}" Foreground="{Binding Ctvrtek.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Ctvrtek.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="5" Text="{Binding Ctvrtek.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="5" Visibility="{Binding Ctvrtek.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="5" Visibility="{Binding Ctvrtek.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="5" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="5" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Ctvrtek.Narozeniny}" Cursor="{Binding Ctvrtek.CursorNarozeniny}" Tag="{Binding Ctvrtek.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="5" Text="{Binding Ctvrtek.Jmeniny}" Cursor="{Binding Ctvrtek.CursorJmeniny}" Tag="{Binding Ctvrtek.TagJmeno}" Foreground="{Binding Ctvrtek.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="5" Text="{Binding Ctvrtek.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="5" ItemsSource="{Binding Ctvrtek.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Pátek -->
+        <Rectangle Grid.Row="6" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="6" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="6" Text="{Binding Patek.Den}" Foreground="{Binding Patek.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Patek.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="6" Text="{Binding Patek.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="6" Visibility="{Binding Patek.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="6" Visibility="{Binding Patek.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="6" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="6" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Patek.Narozeniny}" Cursor="{Binding Patek.CursorNarozeniny}" Tag="{Binding Patek.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="6" Text="{Binding Patek.Jmeniny}" Cursor="{Binding Patek.CursorJmeniny}" Tag="{Binding Patek.TagJmeno}" Foreground="{Binding Patek.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="6" Text="{Binding Patek.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="6" ItemsSource="{Binding Patek.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Sobota -->
+        <Rectangle Grid.Row="7" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="7" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="7" Text="{Binding Sobota.Den}" Foreground="{Binding Sobota.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Sobota.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown"  />
+        </Viewbox>
+        <TextBlock Grid.Row="7" Text="{Binding Sobota.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="7" Visibility="{Binding Sobota.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="7" Visibility="{Binding Sobota.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="7" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="7" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Sobota.Narozeniny}" Cursor="{Binding Sobota.CursorNarozeniny}" Tag="{Binding Sobota.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="7" Text="{Binding Sobota.Jmeniny}" Cursor="{Binding Sobota.CursorJmeniny}" Tag="{Binding Sobota.TagJmeno}" Foreground="{Binding Sobota.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="7" Text="{Binding Sobota.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="7" ItemsSource="{Binding Sobota.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Neděle -->
+        <Rectangle Grid.Row="8" Style="{StaticResource DenRectangle}" />
+        <Viewbox Grid.Row="8" Style="{StaticResource DenViewbox}" >
+            <TextBlock Grid.Row="8" Text="{Binding Nedele.Den}" Foreground="{Binding Nedele.DenFontBrush}" Style="{StaticResource Den}" Tag="{Binding Nedele.Datum}" MouseDown="Day_MouseDown" TouchDown="Day_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="8" Text="{Binding Nedele.DenJmeno}" Style="{StaticResource DenJmeno}" />
+        <Image Grid.Row="8" Visibility="{Binding Nedele.Sluzba}" Style="{StaticResource Sluzba}" />
+        <Image Grid.Row="8" Visibility="{Binding Nedele.Zavreno}" Style="{StaticResource Zavreno}" />
+        <Rectangle Grid.Row="8" Style="{StaticResource NarozRectangle}" />
+        <Viewbox Grid.Row="8" Style="{StaticResource NarozViewbox}" >
+            <TextBlock Text="{Binding Nedele.Narozeniny}" Cursor="{Binding Nedele.CursorNarozeniny}" Tag="{Binding Nedele.TagNaroz}" Style="{StaticResource Narozeniny}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" />
+        </Viewbox>
+        <TextBlock Grid.Row="8" Text="{Binding Nedele.Jmeniny}" Cursor="{Binding Nedele.CursorJmeniny}" Tag="{Binding Nedele.TagJmeno}" Foreground="{Binding Nedele.JmeninyFontBrush}" MouseLeftButtonUp="Narozeniny_MouseLeftButtonUp" TouchDown="Narozeniny_TouchDown" Style="{StaticResource Jmeniny}" />
+        <TextBlock Grid.Row="8" Text="{Binding Nedele.Svatky}" Style="{StaticResource Svatek}" />
+        <ListView Grid.Column="3" Margin="5,5,10,25" Grid.Row="8" ItemsSource="{Binding Nedele.Upominky, UpdateSourceTrigger=PropertyChanged}" ItemContainerStyle="{StaticResource ItemPoznamka}" Style="{StaticResource ItemPanel}" Background="{Binding PoznamkyBrush}" />
+        <!-- Hledání -->
+        <GroupBox Grid.Column="0" Grid.Row="9" Header="Datum" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="gbDatum" VerticalAlignment="Stretch" Width="Auto">
+            <Grid>
+                <TextBox Height="Auto" HorizontalAlignment="Stretch" Margin="0,3,0,0" Name="txtDatum" VerticalAlignment="Stretch" Width="Auto" Text="" MaxLength="10" Padding="17,1,0,0" FontSize="13" />
+                <Image Height="19" HorizontalAlignment="Left" Margin="0,5,0,2" Name="picDatum" Stretch="Fill" VerticalAlignment="Top" Width="19" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="1" Grid.Row="9" Header="Narozeniny" Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="gbNaroz" VerticalAlignment="Stretch" Width="Auto">
+            <Grid>
+                <ComboBox Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="cboNaroz" VerticalAlignment="Stretch" Width="Auto" Text="" Padding="25,3,4,3" IsEditable="True" FontSize="14" />
+                <Image Height="19" HorizontalAlignment="Left" Margin="0,4,0,2" Name="picNaroz" Stretch="Fill" VerticalAlignment="Top" Width="19" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Grid.Row="9" Header="Jmeniny" Height="Auto" HorizontalAlignment="Left" Margin="0" Name="gbJmen" VerticalAlignment="Stretch" Width="140">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="51*" />
+                    <ColumnDefinition Width="87*" />
+                </Grid.ColumnDefinitions>
+                <ComboBox Height="Auto" HorizontalAlignment="Stretch" Name="cboJmen" VerticalAlignment="Stretch" Width="Auto" Padding="25,3,4,3" IsEditable="True" Grid.ColumnSpan="2" FontSize="14" />
+                <Image Height="19" HorizontalAlignment="Left" Margin="0,4,0,0" Name="picJmen" Stretch="Fill" VerticalAlignment="Top" Width="19" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Grid.Column="2" Grid.Row="9" Header="Plány" Height="Auto" HorizontalAlignment="Stretch" Margin="140,0,0,0" Name="gbUpon" VerticalAlignment="Stretch" Width="Auto">
+            <Grid>
+                <TextBox Height="Auto" HorizontalAlignment="Stretch" Margin="0,3,51,0" Name="txtUpon" VerticalAlignment="Stretch" Width="Auto" Text="" MaxLength="10" Padding="20,1,0,0" FontSize="13" />
+                <Image Height="19" HorizontalAlignment="Left" Margin="0,5,0,2" Name="picUpon" Stretch="Fill" VerticalAlignment="Top" Width="19" />
+                <Button Content="starší" Height="24" HorizontalAlignment="Right" Name="btnNext" VerticalAlignment="Top" Width="50" IsEnabled="False" Margin="0,3,0,0" />
+            </Grid>
+        </GroupBox>
+        <Image Height="40" HorizontalAlignment="Right" Margin="0,10,321,0" Name="picP" OpacityMask="Gray" Stretch="Fill" VerticalAlignment="Top" Width="40" Grid.Column="2" Grid.Row="1" Visibility="Hidden" />
+        <TextBlock FontSize="10" FontWeight="Normal" Foreground="DimGray" Grid.Column="3" Grid.Row="9" Height="20" HorizontalAlignment="Right" Margin="10,00,10,0" Name="lblApp" Text="ZJsoftware   Kalendář   Version 3.0.1" VerticalAlignment="Top" Visibility="Hidden"  />
+        <TextBlock FontSize="10" FontWeight="Normal" Foreground="DimGray" Grid.Column="3" Grid.Row="9" Height="20" HorizontalAlignment="Right" Margin="10,15,10,0" Name="lblCop" Text="Copyright © 2003-2012 by Zdeněk Jantač" VerticalAlignment="Top" Visibility="Hidden"  />
+    </Grid>
+</Window>
